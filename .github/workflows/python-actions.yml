@@ -32,6 +32,6 @@ jobs:
     - name: Run against blizzard ai (terran)
       run: |
         docker run -it -d --name app1 test_image
-        docker exec -i app1 bash -c "python test/run_blizzardai_terran.py"
+        docker exec -i app1 bash -c "python /test/run_blizzardai_terran.py"
         docker exec -i app1 bash -c "tree"
         docker rm -f app1
