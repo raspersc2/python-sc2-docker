@@ -4,9 +4,11 @@ on:
   push:
     branches:
       - master
+      - develop
   pull_request:
     branches:
       - master
+      - develop
 
 jobs:
   run_test_bots:
@@ -39,13 +41,13 @@ jobs:
     - name: Run against blizzard ai (protoss)
       run: |
         docker run -it -d --name app1 test_image
-        docker exec -i app1 bash -c "python ./test/run_blizzardai_protoss.py"
+        docker exec -i app1 bash -c "python ./test/run_blizzard_protoss.py"
         docker exec -i app1 bash -c "tree"
         docker rm -f app1
 
     - name: Run against blizzard ai (zerg)
       run: |
         docker run -it -d --name app1 test_image
-        docker exec -i app1 bash -c "python ./test/run_blizzardai_zerg.py"
+        docker exec -i app1 bash -c "python ./test/run_blizzard_zerg.py"
         docker exec -i app1 bash -c "tree"
         docker rm -f app1
