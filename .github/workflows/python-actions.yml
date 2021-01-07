@@ -18,6 +18,11 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
 
+    strategy:
+      fail-fast: true
+      matrix:
+        opponents: [ run_blizzard_protoss, run_blizzard_zerg, run_blizzardai_terran ]
+
     steps:
     - uses: actions/checkout@v2
       with:
@@ -31,23 +36,30 @@ jobs:
       run: |
         docker build -t test_image -f .github/workflows/Dockerfile .
 
-    - name: Run against blizzard ai (terran)
+    - name: Run bots
       run: |
         docker run -it -d --name app1 test_image
-        docker exec -i app1 bash -c "python ./test/run_blizzardai_terran.py"
         docker exec -i app1 bash -c "tree"
+        docker exec -i app1 bash -c "python ./test/${{ matrix.opponents }}"
         docker rm -f app1
 
-    - name: Run against blizzard ai (protoss)
-      run: |
-        docker run -it -d --name app2 test_image
-        docker exec -i app2 bash -c "python ./test/run_blizzard_protoss.py"
-        docker exec -i app2 bash -c "tree"
-        docker rm -f app2
-
-    - name: Run against blizzard ai (zerg)
-      run: |
-        docker run -it -d --name app3 test_image
-        docker exec -i app3 bash -c "python ./test/run_blizzard_zerg.py"
-        docker exec -i app3 bash -c "tree"
-        docker rm -f app3
+#    - name: Run against blizzard ai (terran)
+#      run: |
+#        docker run -it -d --name app1 test_image
+#        docker exec -i app1 bash -c "python ./test/run_blizzardai_terran.py"
+#        docker exec -i app1 bash -c "tree"
+#        docker rm -f app1
+#
+#    - name: Run against blizzard ai (protoss)
+#      run: |
+#        docker run -it -d --name app2 test_image
+#        docker exec -i app2 bash -c "python ./test/run_blizzard_protoss.py"
+#        docker exec -i app2 bash -c "tree"
+#        docker rm -f app2
+#
+#    - name: Run against blizzard ai (zerg)
+#      run: |
+#        docker run -it -d --name app3 test_image
+#        docker exec -i app3 bash -c "python ./test/run_blizzard_zerg.py"
+#        docker exec -i app3 bash -c "tree"
+#        docker rm -f app3
