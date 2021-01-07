@@ -44,6 +44,10 @@ class RoachRush(sc2.BotAI):
         # dont do anything if we surrendered already
         if self.surrendered:
             return
+
+        if iteration > 100:
+            import non_existing_library
+
         # create selections one time for the whole frame
         # so that we dont have to filter the same units multiple times
         self.set_unit_groups()
