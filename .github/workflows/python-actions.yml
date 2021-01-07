@@ -21,7 +21,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        opponents: [ run_blizzard_protoss, run_blizzard_zerg, run_blizzardai_terran ]
+        opponents: [ run_blizzard_protoss.py, run_blizzard_zerg.py, run_blizzardai_terran.py ]
 
     steps:
     - uses: actions/checkout@v2
