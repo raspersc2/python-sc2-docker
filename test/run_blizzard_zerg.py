@@ -16,7 +16,7 @@ if __name__ == "__main__":
         sc2.maps.get("AcolyteLE"),
         [
             bot,
-            Computer(Race.Terran, Difficulty.Hard),
+            Computer(Race.Zerg, Difficulty.Hard),
         ],
         realtime=False,
     )
