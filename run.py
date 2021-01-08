@@ -4,6 +4,7 @@
 # from sc2 import Race, Difficulty
 # from sc2.player import Bot, Computer
 # import random
+import numpy.core.multiarray
 import sc2, sys
 from __init__ import run_ladder_game
 from sc2 import Race, Difficulty
